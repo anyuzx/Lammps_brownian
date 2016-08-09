@@ -34,4 +34,4 @@ fix 1 all bd 1.00 0.01 324231
 
 * `fix bd/baoab`: BAOAB algorithm for Brownian Dynamics simulation.
 * `fix bd/srk`: SRK algorithm for Brownian Dynamics simulation.
-* `fix bd/omp`: OMP version of Brownian Dynamics simulation.
+* `fix bd/omp`/`fix bd/srk/omp`/`fix bd/baoab/omp`: OMP version of Brownian Dynamics simulation.
