@@ -4,40 +4,34 @@ This is the custom `LAMMPS` fix for [overdamped langevin dynamics](https://en.wi
 
 ### Build LAMMPS
 
-1. Put `fix_langevin_overdamp.cpp`, `fix_nve_overdamp.cpp` and their header files into `src` folder of `LAMMPS`. Put `fix_nve_overdamp_omp.cpp` and its header file in `src/USER-OMP` folder.
+1. Put `fix_\*.cpp` and their header files into `src` folder of `LAMMPS`. Put `fix_\*_omp.cpp` and its header file in `src/USER-OMP` folder.
 2. If you want to use `omp` acceraltion for this fix, do `package yes-user-omp` to install `omp` package
 3. Build `LAMMPS`.
 
 ### Use it in input file
 
 ```
-fix ID group-ID langevin/overdamp Tstart Tstop damp seed
+fix ID group-ID bd temperature damp seed
 ```
 
 * ID, group-ID
-* lanevin/overdamp = style name of this fix command
-* Tstart, Tstop = desired temperature at start/end of run (temperature units)
+* bd = style name of this fix command
+* temperature = desired temperature of run (temperature units)
 * damp = damping parameter (time units)
 * seed = random number seed to use for white noise (positive integer)
-
-Like `fix langevin`, `fix langevin/overdamp` also doesn't do integration. To use `fix langevin/overdamp` one also should include `fix nve/overdamp` in their input file before `fix langevin/overdamp`. The command for `fix nve/overdamp` is 
-
-```
-fix ID group-ID nve/overdamp damp
-```
-
-* damp = damping parameter (time units)
-
-This damping parameter must be the same as the damping parameter specified in `fix langevin/overdamp`.
 
 ### Examples
 
 ```
-fix 1 all nve/overdamp 0.01
-fix 2 all langevin/overdamp 1.00 1.00 0.01 3301384
+fix 1 all bd 1.00 0.01 324231
 ```
 
 ## IMPORTANT NOTES
 
-* damping parameters in `fix nve/overdamp` and `fix langevin/overdamp` must have the same value
 * 1/damp should be much larger than one. This is to ensure the parameters are indeed for overdamped/high friction/low intertia regime. For instance, damp = 0.01 is sufficiently large for brownian dynamics simulation. damp = 100 is too small to use this fix.
+
+## Other Options
+
+* `fix bd/baoab`: BAOAB algorithm for Brownian Dynamics simulation.
+* `fix bd/srk`: SRK algorithm for Brownian Dynamics simulation.
+* `fix bd/omp`: OMP version of Brownian Dynamics simulation.
