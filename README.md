@@ -33,7 +33,7 @@ fix 1 all bd 1.00 0.01 324231
 
 ## IMPORTANT NOTES
 
-* 1/damp should be much larger than one. This is to ensure the parameters are indeed for overdamped/high friction/low intertia regime. For instance, damp = 0.01 is sufficiently large for brownian dynamics simulation. damp = 100 is too small to use this fix.
+* damp should be much smaller than one. This is to ensure the parameters are indeed for overdamped/high friction/low intertia regime. For instance, damp = 0.01 is sufficiently small for brownian dynamics simulation. damp = 100 is too large to use this fix.
 
 ## Other Options
 
