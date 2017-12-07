@@ -1,4 +1,4 @@
-:heavy_exclamation_mark: Only fix bd and fix bd/baoab works. Do not use OMP versions.
+:heavy_exclamation_mark: **Only fix bd and fix bd/baoab works. Do not use OMP versions.**
 
 README
 ------
