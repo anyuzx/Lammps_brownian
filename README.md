@@ -9,9 +9,8 @@ This is the custom `LAMMPS` fix for [overdamped langevin dynamics](https://en.wi
 
 ### Build LAMMPS
 
-1. Put `fix_\*.cpp` and their header files into `src` folder of `LAMMPS`. Put `fix_\*_omp.cpp` and its header file in `src/USER-OMP` folder.
-2. If you want to use `omp` acceraltion for this fix, do `package yes-user-omp` to install `omp` package
-3. Build `LAMMPS`.
+1. Put `fix_bd.cpp`/`fix_bd_baoab.cpp` and their header files into `src` folder of `LAMMPS`.
+2. Build `LAMMPS`.
 
 ### Use it in input file
 
