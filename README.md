@@ -1,13 +1,8 @@
-:heavy_exclamation_mark: **Only fix bd and fix bd/baoab works. Do not use OMP versions.**
-
-README
-------
-
-This is the custom `LAMMPS` fix for [overdamped langevin dynamics](https://en.wikipedia.org/wiki/Brownian_dynamics)(Brownian dynamics). `LAMMPS` has `fix langevin` for langevin dynamics simulation. However the algorithm LAMMPS use to integrate langevin dynamics equation is Velocity-Verlet. This is not suiable for high friction(overdamped) simulation. Here are several files I modified from original `fix_langevin.cpp` and some other files to give `LAMMPS` a fix for overdamped langevin dynamics simulation. This fix is only suitable for high friction case since velocity is overdamped. The detailed physics for this fix can be viewed in `derivation.pdf`. For low friction, please use original `fix langevin`. As for what value is approriate for high and low friction, one should do experiments themsevles.
+This is the custom `LAMMPS` fix for [overdamped Langevin dynamics](https://en.wikipedia.org/wiki/Brownian_dynamics)(Brownian dynamics). `LAMMPS` has `fix langevin` for Langevin dynamics simulation. However, the algorithm LAMMPS use to integrate Langevin dynamics equation is Velocity-Verlet. This is not suitable for high friction(overdamped) simulation. Here are several files I modified from original `fix_langevin.cpp` and some other files to give `LAMMPS` a fix for overdamped Langevin dynamics simulation. This fix is only suitable for high friction case since velocity is overdamped. The detailed physics for this fix can be viewed in `derivation.pdf`. 
 
 For more information and derivation of equation of motions, you can read this blog post as well https://www.guangshi.io/posts/simulating-brownian/
 
-## HOW TO USE
+## How to use
 
 ### Build LAMMPS
 
@@ -32,16 +27,20 @@ fix ID group-ID bd temperature damp seed
 fix 1 all bd 1.00 0.01 324231
 ```
 
-## IMPORTANT NOTES
+## Remarks
 
-* damp should be much smaller than one. This is to ensure the parameters are indeed for overdamped/high friction/low intertia regime. For instance, damp = 0.01 is sufficiently small for brownian dynamics simulation. damp = 100 is too large to use this fix. Instead, just use `fix langevin` for large value of damp constant.
+* For low friction, please use original `fix langevin`. As for what value is appropriate for high and low friction, one should do experiments themselves.
+
+* damp should be much smaller than one. This is to ensure the parameters are indeed for overdamped/high friction/low inertia regime. For instance (with LJ unit for simplicity), damp = 0.01 is sufficiently small for Brownian dynamics simulation. damp = 100 is too large to use this fix. Instead, just use `fix langevin` for a large value of damp constant.
+
+* :heavy_exclamation_mark: **Only fix bd and fix bd/baoab works. Do not use OMP versions.**
 
 ## Other Options
 
-* `fix bd/baoab`: BAOAB algorithm for Brownian Dynamics simulation.
-* ~~`fix bd/srk`: SRK algorithm for Brownian Dynamics simulation.~~ (**DO NOT USE**)
-* ~~`fix bd/omp`/`fix bd/srk/omp`/`fix bd/baoab/omp`: OMP version of Brownian Dynamics simulation.~~ (**DO NOT USE**)
+* `fix bd/baoab`: BAOAB algorithm for Brownian Dynamics simulation (see https://arxiv.org/abs/1203.5428).
+* ~~`fix bd/srk`: SRK algorithm for Brownian Dynamics simulation.~~ (**discarded**)
+* ~~`fix bd/omp`/`fix bd/srk/omp`/`fix bd/baoab/omp`: OMP version of Brownian Dynamics simulation.~~ (**discarded**)
 
-## Reference
+#### Reference
 
 * Leimkuhler, Benedict, and Charles Matthews. "Rational construction of stochastic numerical methods for molecular sampling." Applied Mathematics Research eXpress 2013.1 (2012): 34-56.
