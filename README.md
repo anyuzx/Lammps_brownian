@@ -1,5 +1,6 @@
 :green_circle: **Latest version of LAMMPS now contains official fix command for overdamped BD**. See [here](https://docs.lammps.org/fix_brownian.html).
 
+---
 
 This is the custom `LAMMPS` fix for [overdamped Langevin dynamics](https://en.wikipedia.org/wiki/Brownian_dynamics)(Brownian dynamics). `LAMMPS` has `fix langevin` for Langevin dynamics simulation. However, the algorithm LAMMPS use to integrate Langevin dynamics equation is Velocity-Verlet. This is not suitable for high friction(overdamped) simulation. Here are several files I modified from original `fix_langevin.cpp` and some other files to give `LAMMPS` a fix for overdamped Langevin dynamics simulation. This fix is only suitable for high friction case since velocity is overdamped. For more information and derivation of equation of motions, you can read this blog post as well https://www.guangshi.io/posts/simulating-brownian/
 
